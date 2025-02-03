@@ -8,7 +8,7 @@ const num_states_ex = 2
 export default function Navbar() {
     return (
         <nav>
-            <ul className="navbar">
+            <ul className="navbar" onClick={() => {document.body.style.backgroundColor="white"}}>
                 <li className="navbar">
                     <Link to="/">
                         Home
