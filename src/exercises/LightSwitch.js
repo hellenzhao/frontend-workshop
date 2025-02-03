@@ -21,8 +21,3 @@ export default function LightSwitch() {
       </button>
     );
 }
-
-
-// Solution: pass function reference not call to onClick (change handleClick() to handleClick)
-
-  

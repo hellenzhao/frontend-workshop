@@ -21,6 +21,3 @@ export default function ColorSwitch({onChangeColor}) {
         </button>
     )
 }
-
-
-// Solution: onChangeColor() & e.stopPropagation()
