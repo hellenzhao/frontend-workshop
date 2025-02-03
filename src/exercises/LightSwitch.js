@@ -16,13 +16,10 @@ export default function LightSwitch() {
     }
   
     return (
-      <button onClick={handleClick()}>
+      <button onClick={handleClick}>
         Toggle the lights
       </button>
     );
 }
-
-
-// Solution: pass function reference not call to onClick (change handleClick() to handleClick)
 
   

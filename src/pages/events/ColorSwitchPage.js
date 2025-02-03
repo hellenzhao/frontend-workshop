@@ -18,7 +18,6 @@ export default function ColorSwitchPage() {
   function handleChangeColor() {
     let bodyStyle = document.body.style;
     bodyStyle.backgroundColor = getRandomLightColor();
-    console.log(getRandomLightColor())
   }
 
   return (

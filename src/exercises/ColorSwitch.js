@@ -15,12 +15,10 @@
 export default function ColorSwitch({onChangeColor}) {
     return (
         <button onClick={(e) => {
-            
+            onChangeColor()
+            e.stopPropagation()
         }}>
             Change Color
         </button>
     )
 }
-
-
-// Solution: onChangeColor() & e.stopPropagation()

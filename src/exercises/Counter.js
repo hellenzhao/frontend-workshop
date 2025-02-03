@@ -7,18 +7,6 @@ import { useState } from 'react';
 
 
 export default function Counter() {
-    return (
-        <div>
-            <h4>Clicks: ?</h4>
-            
-            (Put buttons here)
-        </div>
-    )
-}
-
-// solution
-/*
-export default function Counter() {
     const [count, setCount] = useState(0);
 
     const increment = () => {
@@ -38,4 +26,3 @@ export default function Counter() {
         </div>
     )
 }
-*/

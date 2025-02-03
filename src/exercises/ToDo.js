@@ -6,19 +6,10 @@ import { useState } from 'react';
  * Use React's state hook to add, delete, and check off tasks.
 */
 
-/*
-export default function ToDo() {
-    return (
-        <>
-        </>
-    )
-}
-*/
 
-// solution
 export default function ToDo() {
-    const [incompleted, setIncompleted] = useState(["Do Homework", "Exercise"])
-    const [completed, setCompleted] = useState(["Make Bed"])
+    const [incompleted, setIncompleted] = useState([])
+    const [completed, setCompleted] = useState([])
     const [newTask, setNewTask] = useState("")
 
     const handleChange = (e) => {
@@ -26,24 +17,27 @@ export default function ToDo() {
         setNewTask(task)
     }
     const handleAdd = () => {
-        setIncompleted([...incompleted, newTask]);
+        if (newTask !== "") {
+            setIncompleted([...incompleted, newTask])
+            setNewTask("")
+        }
     }
-    const handleDel = (listItem, isCompleted) => {
+    const handleDel = (index, isCompleted) => {
         if (isCompleted) {
-            setCompleted(completed.filter((item) => (item !== listItem)))
+            setCompleted(completed.toSpliced(index, 1))
         }
         else {
-            setIncompleted(incompleted.filter((item) => (item !== listItem)))
+            setIncompleted(incompleted.toSpliced(index, 1))
         }
     }
-    const handleCheck = (listItem, isChecked) => {
-        if (isChecked) {
+    const handleCheck = (listItem, index, isCompleted) => {
+        if (isCompleted) {
             setCompleted([...completed, listItem])
-            setIncompleted(incompleted.filter((item) => (item !== listItem)))
+            setIncompleted(incompleted.toSpliced(index, 1))
         }
         else {
             setIncompleted([...incompleted, listItem])
-            setCompleted(completed.filter((item) => (item !== listItem)))
+            setCompleted(completed.toSpliced(index, 1))
         }
     }
 
@@ -52,17 +46,17 @@ export default function ToDo() {
         <div className="todo-list container">
             <h3>Add Item</h3>
             <p>
-                <input id="new-task" type="text" placeholder="Enter task" onChange={handleChange}/>
+                <input id="new-task" type="text" placeholder="Enter task" value={newTask} onChange={handleChange}/>
                 <button className="todo-button" id="addButton" onClick={handleAdd}>Add</button>
             </p>
             <h3>Todo</h3>
             <ul id="incompleted-tasks">
-                {incompleted.map((listItem) => {
+                {incompleted.map((listItem, index) => {
                     return (
-                        <li key={listItem}>
-                            <input type="checkbox" onChange={() => handleCheck(listItem, true)}/>
+                        <li key={index}>
+                            <input type="checkbox" checked={false} onChange={() => handleCheck(listItem, index, true)}/>
                             <label>{listItem}</label>
-                            <button className="delete todo-button" onClick={() => handleDel(listItem, false)}>Delete</button>
+                            <button className="delete todo-button" onClick={() => handleDel(index, false)}>Delete</button>
                         </li>
                     ) 
                 })}
@@ -70,12 +64,12 @@ export default function ToDo() {
 
             <h3>Completed</h3>
             <ul id="completed-tasks">
-                {completed.map((listItem) => {
+                {completed.map((listItem, index) => {
                     return (
-                        <li key={listItem}>
-                            <input type="checkbox" onChange={() => handleCheck(listItem, false)}/>
+                        <li key={index}>
+                            <input type="checkbox" checked={true} onChange={() => handleCheck(listItem, index, false)}/>
                             <label>{listItem}</label>
-                            <button className="delete button" onClick={() => handleDel(listItem, true)}>Delete</button>
+                            <button className="delete button" onClick={() => handleDel(index, true)}>Delete</button>
                         </li>
                     )
                 })}
